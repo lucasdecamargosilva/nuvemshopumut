@@ -1130,7 +1130,7 @@
                     const _txt = restantes + (restantes === 1 ? ' prova restante hoje' : ' provas restantes hoje');
                     _els.forEach(el => { el.textContent = _txt; el.classList.remove('is-warn'); });
                 } else {
-                    _els.forEach(el => { el.textContent = 'Limite de 3 provas por dia atingido — volte amanhã 😊'; el.classList.add('is-warn'); });
+                    _els.forEach(el => { el.textContent = 'Limite de 3 provas por dia atingido — volte amanhã'; el.classList.add('is-warn'); });
                 }
             } catch(_) { _els.forEach(el => { el.textContent = ''; el.classList.remove('is-warn'); }); }
         }
@@ -1479,7 +1479,7 @@ const fd = new FormData();
                 const data = await resp.json();
                 if (data.limited) {
                     genBtn.disabled = false;
-                    document.querySelectorAll('.q-provas-msg').forEach(el => { el.textContent = 'Limite de 3 provas por dia atingido — volte amanhã 😊'; el.classList.add('is-warn'); });
+                    document.querySelectorAll('.q-provas-msg').forEach(el => { el.textContent = 'Limite de 3 provas por dia atingido — volte amanhã'; el.classList.add('is-warn'); });
                     return;
                 }
             } catch (_) {
