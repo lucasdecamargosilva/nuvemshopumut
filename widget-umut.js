@@ -55,9 +55,7 @@
     window.PROVOU_LEVOU_API_KEY = apiKey;
 
     const WEBHOOK_PROVA = 'https://n8n.segredosdodrop.com/webhook/gerador-oculos';
-    const WEBHOOK_PIX = 'https://n8n.segredosdodrop.com/webhook/umut-pix';
-    const WEBHOOK_PIX_STATUS = 'https://n8n.segredosdodrop.com/webhook/umut-pix-status';
-    const WEBHOOK_CHECK_LIMIT = 'https://n8n.segredosdodrop.com/webhook/umut-check-limit';
+            const WEBHOOK_CHECK_LIMIT = 'https://n8n.segredosdodrop.com/webhook/umut-check-limit';
     const SIZES_TOP = ['XXP', 'XP', 'P', 'M', 'G', 'XG', 'XXG', '3XG', '4XG', '5XG'];
     const SIZES_BOTTOM = ['36/XXP', '38/XP', '40/P', '42/M', '44/G', '46/XG', '48/XXG', '50/3XG', '52/4XG', '54/5XG'];
     const SIZES_BOTTOM_SW = ['XXP', 'XP', 'P', 'M', 'G', 'XG', 'XXG', '3XG', '4XG', '5XG'];
@@ -438,7 +436,6 @@
         }
         .q-btn-outline:hover { border-color: var(--c-ink); background: var(--c-surface); }
 
-        /* ── PIX screen ── */
         #q-step-pix {
             display: none; text-align: center;
             padding: 36px 28px; flex-direction: column; gap: 16px; align-items: center;
@@ -1209,11 +1206,8 @@
         }
 
         // ── PIX: polling e controle ──
-        let pixPollingTimer = null;
-
-        function stopPixPolling() {
-            if (pixPollingTimer) { clearInterval(pixPollingTimer); pixPollingTimer = null; }
-        }
+        
+                }
 
         function showPixScreen() {
             uploadStep.style.display = 'none';
@@ -1264,16 +1258,7 @@
             } catch(_) {}
         }
 
-        async function createPixAndPoll() {
-            showPixScreen();
-            const phone = '55' + phoneInput.value.replace(/\D/g, '');
-            try {
-                let pix;
-                const pending = _pixLoadPending(phone);
-                if (pending) {
-                    // Reaproveita PIX pendente
-                    pix = { payment_id: pending.payment_id, qr_code: pending.qr_code, qr_code_base64: pending.qr_code_base64 };
-                } else {
+        async                 } else {
                     const resp = await fetch(WEBHOOK_PIX, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
