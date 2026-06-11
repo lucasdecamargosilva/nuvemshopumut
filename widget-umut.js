@@ -55,7 +55,7 @@
     window.PROVOU_LEVOU_API_KEY = apiKey;
 
     const WEBHOOK_PROVA = 'https://n8n.segredosdodrop.com/webhook/gerador-oculos';
-            const WEBHOOK_CHECK_LIMIT = 'https://n8n.segredosdodrop.com/webhook/umut-check-limit';
+    const WEBHOOK_CHECK_LIMIT = 'https://n8n.segredosdodrop.com/webhook/umut-check-limit';
     const SIZES_TOP = ['XXP', 'XP', 'P', 'M', 'G', 'XG', 'XXG', '3XG', '4XG', '5XG'];
     const SIZES_BOTTOM = ['36/XXP', '38/XP', '40/P', '42/M', '44/G', '46/XG', '48/XXG', '50/3XG', '52/4XG', '54/5XG'];
     const SIZES_BOTTOM_SW = ['XXP', 'XP', 'P', 'M', 'G', 'XG', 'XXG', '3XG', '4XG', '5XG'];
@@ -1278,7 +1278,7 @@
                     attempts++;
                     if (attempts > 100) { stopPixPolling(); return; }
                     try {
-                        const sr = await fetch(WEBHOOK_PIX_STATUS + '?payment_id=' + pix.payment_id);
+                        
                         const st = await sr.json();
                         if (st.status === 'approved') {
                             stopPixPolling();
