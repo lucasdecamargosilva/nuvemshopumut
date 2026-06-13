@@ -781,7 +781,9 @@
         openBtn.innerHTML = stampImageHTML;
 
 
-        const imgContainers = ['.js-product-slide', '.product-image-column', '.js-swiper-product', '[data-store^="product-image-"]', '.product__media-wrapper', '.product-gallery__media', '.product__media', '.product-image-main', '.product-media-container', '[data-media-id]', '.product__media-item', '.product-gallery', '.product-single__media', '.media-gallery'];
+        // Containers ESTÁVEIS primeiro (não movem com o Swiper). .js-product-slide e
+        // .swiper-slide são slides que se deslocam/escondem — ficam por último (fallback).
+        const imgContainers = ['.product-image-container', '.js-swiper-product', '.product-image-column', '[data-store^="product-image-"]', '.product__media-wrapper', '.product-gallery__media', '.product__media', '.product-image-main', '.product-media-container', '[data-media-id]', '.product__media-item', '.product-gallery', '.product-single__media', '.media-gallery', '.js-product-slide'];
 
         function tryPlaceTriggerBtn() {
             // 1ª prioridade: container que tenha <img> dentro (evita cair em slide de vídeo)
@@ -1206,8 +1208,11 @@
         }
 
         // ── PIX: polling e controle ──
-        
-                }
+        let pixPollingTimer = null;
+
+        function stopPixPolling() {
+            if (pixPollingTimer) { clearInterval(pixPollingTimer); pixPollingTimer = null; }
+        }
 
         function showPixScreen() {
             uploadStep.style.display = 'none';
@@ -1258,7 +1263,15 @@
             } catch(_) {}
         }
 
-        async                 } else {
+        async function createPixAndPoll() {
+            showPixScreen();
+            const phone = '55' + phoneInput.value.replace(/\D/g, '');
+            try {
+                let pix;
+                const pending = _pixLoadPending(phone);
+                if (pending) {
+                    pix = { payment_id: pending.payment_id, qr_code: pending.qr_code, qr_code_base64: pending.qr_code_base64 };
+                } else {
                     const resp = await fetch(WEBHOOK_PIX, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
