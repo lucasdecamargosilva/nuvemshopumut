@@ -1693,6 +1693,12 @@ const fd = new FormData();
                     const contentType = res.headers.get("content-type") || "";
                     if (contentType.includes("application/json")) {
                         const data = await res.json();
+                        if (data.limited || data.error === 'limite_diario') {
+                            try { document.getElementById('q-loading-box').style.display = 'none'; } catch (_) {}
+                            try { loadingBox.style.display = 'none'; } catch (_) {}
+                            document.querySelectorAll('.q-provas-msg').forEach(function(el){ el.textContent = 'Limite de provas por dia atingido - volte amanha'; el.classList.add('is-warn'); });
+                            return;
+                        }
                         if (data.error) {
                             document.getElementById('q-loading-box').style.display = 'none';
                             photoStep.style.display = 'flex';
