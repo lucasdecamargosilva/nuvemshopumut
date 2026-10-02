@@ -2,7 +2,7 @@
 
     // KILL-SWITCH: provador ativo. Pra desativar: trocar PL_DESATIVADO para true e dar push.
 
-    var PL_DESATIVADO = false;
+    var PL_DESATIVADO = true;   // desligado 02/10/2026 a pedido do Lucas (inadimplente). Religar = false
 
     if (PL_DESATIVADO) return;
 
